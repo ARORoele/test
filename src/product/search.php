@@ -12,6 +12,6 @@ class search
 {
    public static function search()
    {
-      return 'Give me a product, pls';
+      return 'Give me a product';
    }
 }
