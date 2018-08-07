@@ -12,6 +12,6 @@ class search
 {
    public static function version()
    {
-      return 'this is DataPharma package v_1.0.3';
+      return 'This is DataPharma package v_1.0.3';
    }
 }
