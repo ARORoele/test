@@ -10,8 +10,8 @@ namespace product;
 
 class search
 {
-   public static function search()
+   public static function version()
    {
-      return 'Give me a product';
+      return 'this is datapharma package v1.0.2';
    }
 }
