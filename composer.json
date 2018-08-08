@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Datapharma\\Product\\": "src/product/"
+            "Datapharma\\Product\\": "src/"
         }
     }
 }
