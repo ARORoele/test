@@ -24,10 +24,11 @@ class Search extends Curl
             'country' => $country,
             'name' => $searchValue,
          );
-         return $this->curlRequest($params,$this->url);
+         $this->curlResult = $this->curlRequest($params,$this->url);
       }else{
          $this->curlResult['status'] = false;
          $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
       }
+      return $this->curlResult;
    }
 }
