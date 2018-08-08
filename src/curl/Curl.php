@@ -6,9 +6,8 @@
  * Time: 09:46
  */
 
-class curl
+class Curl
 {
-
    private $userName;
 
    private $apiKey;
