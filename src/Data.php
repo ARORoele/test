@@ -12,13 +12,25 @@ use Datapharma\Product\Curl\Curl;
 
 class Data extends Curl
 {
+
+   private $url =  'api/v1/products/productdata';
+
    public function __construct($username,$apikey) {
       parent::__construct($username,$apikey);
-
    }
 
 
-   public static function version(){
-      return 'DataPharma package v_1.0.9';
+   public  function getProductInfo($searchValue,$country,$localeID = 1){
+      if(!empty($searchValue) && !empty($country)){
+         $params = array(
+            'country' => $country,
+            'name' => $searchValue,
+         );
+         $this->curlResult = $this->curlRequest($params,$this->url);
+      }else{
+         $this->curlResult['status'] = false;
+         $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
+      }
+      return $this->curlResult;
    }
 }

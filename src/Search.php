@@ -12,7 +12,7 @@ use Datapharma\Product\Curl\Curl;
 
 class Search extends Curl
 {
-   private $url =  'api/v1/products/productdata';
+   private $url =  'api/v1/products/search';
 
    public function __construct($username,$apikey) {
       parent::__construct($username,$apikey);

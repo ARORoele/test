@@ -32,9 +32,13 @@ class Curl
          if(isset($queryParams['username']) && isset($queryParams['apikey'])){
             $queryParams = http_build_query($queryParams);
             curl_setopt_array($this->curlObject, array(
-               CURLOPT_RETURNTRANSFER => 1,
-               CURLOPT_IPRESOLVE => 1,
-               CURL_IPRESOLVE_V4 => 1,
+               CURLOPT_RETURNTRANSFER => true,
+               CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4 ,
+               CURLOPT_DNS_USE_GLOBAL_CACHE => true ,
+               CURLOPT_CONNECT_ONLY => false ,
+               CURLOPT_FRESH_CONNECT => false ,
+               CURLOPT_FORBID_REUSE => false ,
+               CURLOPT_DNS_CACHE_TIMEOUT => 500 ,
                CURLOPT_URL => $this->baseUrl .  $urlPath . '?' . $queryParams
             ));
             $this->curlResult['status'] = true;
