@@ -8,7 +8,9 @@
 
 namespace Datapharma\Product;
 
-class Search extends \Curl
+use Datapharma\Product\Curl\Curl;
+
+class Search extends Curl
 {
    private $url =  'api/v1/products/productdata';
 

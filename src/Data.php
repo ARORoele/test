@@ -8,7 +8,9 @@
 
 namespace Datapharma\Product;
 
-class Data extends \Curl
+use Datapharma\Product\Curl\Curl;
+
+class Data extends Curl
 {
    public function __construct($username,$apikey) {
       parent::__construct($username,$apikey);
