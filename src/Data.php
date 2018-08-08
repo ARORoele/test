@@ -17,6 +17,6 @@ class Data extends \Curl
 
 
    public static function version(){
-      return 'DataPharma package v_1.0.9 ';
+      return 'DataPharma package v_1.0.9';
    }
 }
