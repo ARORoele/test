@@ -14,7 +14,7 @@ class Curl
 
    private $apiKey;
 
-   private $baseUrl = 'https://www.datapharma.virtualotc.eu/';
+   private $baseUrl = 'https://www.datapharma.eu/';
 
    private $curlObject;
 

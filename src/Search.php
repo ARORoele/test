@@ -18,11 +18,50 @@ class Search extends Curl
       parent::__construct($username,$apikey);
    }
 
-   public  function searchProducts($searchValue,$country,$localeID = 1){
+   /**
+    * @param searchValue
+    * Can be the main barcode for the country or the name
+    * @param country
+    * This is the upper case abbrev for a country
+    * For example : France => FR
+    * @return array
+    * Status => True/false
+    * ErrorMsg => displays what went wrong if the status is False
+    * Data => All data related to the search if the status is True
+    */
+
+   public  function searchProducts($searchValue,$country,$image = false){
       if(!empty($searchValue) && !empty($country)){
          $params = array(
             'country' => $country,
-            'name' => $searchValue,
+            'search' => $searchValue,
+            'image' => $image,
+         );
+         $this->curlResult = $this->curlRequest($params,$this->url);
+      }else{
+         $this->curlResult['status'] = false;
+         $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
+      }
+      return $this->curlResult;
+   }
+
+   /**
+    * @param id
+    * Should be the ID from a product
+    * @param country
+    * This is the upper case abbrev for a country
+    * For example : France => FR
+    * @return array
+    * Status => True/false
+    * ErrorMsg => displays what went wrong if the status is False
+    * Data => All data related to the search if the status is True
+    */
+
+   public  function searchProductByID($id,$country,$localeID = 1){
+      if(!empty($id) && !empty($country)){
+         $params = array(
+            'country' => $country,
+            'id' => $id,
          );
          $this->curlResult = $this->curlRequest($params,$this->url);
       }else{
