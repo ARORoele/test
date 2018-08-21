@@ -12,7 +12,7 @@ use Datapharma\Product\Curl\Curl;
 
 class Search extends Curl
 {
-   private $url =  'api/v1/products/search';
+   private $url =  'api/v1/products/';
 
    public function __construct($username,$apikey) {
       parent::__construct($username,$apikey);
@@ -37,7 +37,7 @@ class Search extends Curl
             'search' => $searchValue,
             'image' => $image,
          );
-         $this->curlResult = $this->curlRequest($params,$this->url);
+         $this->curlResult = $this->curlRequest($params,$this->url . 'search');
       }else{
          $this->curlResult['status'] = false;
          $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
@@ -63,11 +63,52 @@ class Search extends Curl
             'country' => $country,
             'id' => $id,
          );
-         $this->curlResult = $this->curlRequest($params,$this->url);
+         $this->curlResult = $this->curlRequest($params,$this->url . 'search');
       }else{
          $this->curlResult['status'] = false;
          $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
       }
       return $this->curlResult;
    }
+
+   /**
+    * @param id
+    * Should be the ID from a product
+    * @param country
+    * This is the upper case abbrev for a country
+    * For example : France => FR
+    * @param localeID
+    * This is a numeric value that represents the language
+    * The value 1 is always the main language of the country
+    * For example : France => 1
+    * @param offset
+    * This is a numeric value that represents how much products that you will skip
+    * For example : 5 => start return at product 6
+    * @param limit
+    * This is a numeric value that represents how much products you want to receive
+    * For example : 5 => return maximum 5 products
+    * @return array
+    * Status => True/false
+    * ErrorMsg => displays what went wrong if the status is False
+    * Data => All data related to the search if the status is True
+    */
+
+   public function searchRelatedProductsByIngredient($id,$country,$localeID = 1,$offset = 0,$limit = 5){
+      if(!empty($id) && !empty($country)){
+         $params = array(
+            'country' => $country,
+            'id' => $id,
+            'localeID' => $localeID,
+            'offset' => $offset,
+            'limit' => $limit,
+         );
+         $this->curlResult = $this->curlRequest($params,$this->url. 'getrelatedproducts');
+      }else{
+         $this->curlResult['status'] = false;
+         $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
+      }
+      return $this->curlResult;
+   }
+
+
 }
