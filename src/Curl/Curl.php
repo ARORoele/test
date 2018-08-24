@@ -26,7 +26,7 @@ class Curl
       $this->curlObject = curl_init();
    }
 
-   public function curlRequest($queryParams,$urlPath){
+   protected function curlRequest($queryParams,$urlPath){
       if(!empty($this->curlObject) && !empty($queryParams)){
          $queryParams = array_merge($queryParams,array('username'=>$this->userName,'apikey'=>$this->apiKey));
          if(isset($queryParams['username']) && isset($queryParams['apikey'])){
