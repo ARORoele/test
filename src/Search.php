@@ -57,11 +57,12 @@ class Search extends Curl
     * Data => All data related to the search if the status is True
     */
 
-   public  function searchProductByID($id,$country,$localeID = 1){
+   public  function searchProductByID($id,$country,$image = false){
       if(!empty($id) && !empty($country)){
          $params = array(
             'country' => $country,
             'id' => $id,
+            'image'=>$image
          );
          $this->curlResult = $this->curlRequest($params,$this->url . 'search');
       }else{
@@ -97,7 +98,7 @@ class Search extends Curl
       if(!empty($id) && !empty($country)){
          $params = array(
             'country' => $country,
-            'id' => $id,
+            'productID' => $id,
             'localeID' => $localeID,
             'offset' => $offset,
             'limit' => $limit,

@@ -26,23 +26,22 @@ class Curl
       $this->curlObject = curl_init();
    }
 
-   protected function curlRequest($queryParams,$urlPath){
+   public function curlRequest($queryParams,$urlPath){
       if(!empty($this->curlObject) && !empty($queryParams)){
          $queryParams = array_merge($queryParams,array('username'=>$this->userName,'apikey'=>$this->apiKey));
          if(isset($queryParams['username']) && isset($queryParams['apikey'])){
             $queryParams = http_build_query($queryParams);
             curl_setopt_array($this->curlObject, array(
-               CURLOPT_RETURNTRANSFER => true,
-               CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4 ,
-               CURLOPT_DNS_USE_GLOBAL_CACHE => true ,
-               CURLOPT_CONNECT_ONLY => false ,
-               CURLOPT_FRESH_CONNECT => false ,
-               CURLOPT_FORBID_REUSE => false ,
-               CURLOPT_DNS_CACHE_TIMEOUT => 500 ,
+               CURLOPT_RETURNTRANSFER => 1,
+               CURLOPT_IPRESOLVE => 1,
+               CURL_IPRESOLVE_V4 => 1,
                CURLOPT_URL => $this->baseUrl .  $urlPath . '?' . $queryParams
             ));
             $this->curlResult['status'] = true;
             $this->curlResult['data'] = curl_exec($this->curlObject);
+            if(empty($this->curlResult['data'])){
+               $this->curlResult['errorMsg'] = curl_errno($this->curlObject);
+            }
          }else{
             $this->curlResult['status'] = false;
             $this->curlResult['errorMsg'] = 'No curl request sent because no username and apikey found';
