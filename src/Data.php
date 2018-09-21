@@ -12,7 +12,6 @@ use Datapharma\Product\Curl\Curl;
 
 class Data extends Curl
 {
-
    private $url =  'api/v1/products/';
 
    public function __construct($username,$apikey) {
@@ -60,14 +59,14 @@ class Data extends Curl
     */
 
    public  function getAllProductsWithMainBarcodes($country){
-      if(!empty($searchValue) && !empty($country)){
+      if(!empty($country)){
          $params = array(
             'country' => $country,
          );
          $this->curlResult = $this->curlRequest($params,$this->url. 'getallmainbarcodes');
       }else{
          $this->curlResult['status'] = false;
-         $this->curlResult['errorMsg'] = 'No curl request sent because no search value and/or country found';
+         $this->curlResult['errorMsg'] = 'No curl request sent because no search country found';
       }
       return $this->curlResult;
    }
