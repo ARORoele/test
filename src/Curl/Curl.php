@@ -24,6 +24,7 @@ class Curl
       $this->userName = $userName;
       $this->apiKey = $apiKey;
       $this->curlObject = curl_init();
+
    }
 
    protected function curlRequest($queryParams,$urlPath){
